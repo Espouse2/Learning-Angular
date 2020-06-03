@@ -1,26 +1,49 @@
 import { Component } from '@angular/core';
 
+interface Passenger {
+  id: number;
+  fullname: string;
+  checkedIn: boolean;
+}
+
 @Component({
   selector: 'app-root',
   styleUrls: ['./app.component.scss'],
-  template:`
+  template: `
     <div class="app">
-      {{ title }}
-      <div>
-        {{ numberOne + numberTwo }}
-      </div>
-      <div>
-        {{ isHappy ? ':)' : ':(' }}
-      </div>
+      <h3>Airline Passengers</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index;">
+          <span 
+          class="status"
+          [ngClass]="{ 'checked-in': passenger.checkedIn }"></span>
+          {{ passenger.id }}: {{ passenger.fullname }}
+        </li>
+      </ul>
     </div>
   `
 })
+
 export class AppComponent {
-  title: string;
-  isHappy: boolean = true;
-  numberOne: number = 1;
-  numberTwo: number = 2;
-  constructor(){
-    this.title = 'Ultimate Angular';
-  }
+  passengers: Passenger[] = [{
+    id: 1,
+    fullname: 'Stephen',
+    checkedIn: true
+  }, {
+    id: 2,
+    fullname: 'Rose',
+    checkedIn: false
+  }, {
+    id: 3,
+    fullname: 'James',
+    checkedIn: true
+  }, {
+    id: 4,
+    fullname: 'Tina',
+    checkedIn: false
+  }, {
+    id: 5,
+    fullname: 'Louise',
+    checkedIn: true
+  }];
 }
